@@ -1,0 +1,110 @@
+[
+    {
+        "id": "2178b113-a1f4-459a-ab2f-bc4486a34334",
+        "image_name": "test.jpg",
+        "prediction": "Damaged",
+        "risk_score": 85,
+        "latitude": 11.1271,
+        "longitude": 78.6569,
+        "timestamp": "2026-05-04T09:22:42.811517",
+        "status": "Resolved"
+    },
+    {
+        "id": "5c4b046e-ef99-41a8-90f8-2f1967c1d755",
+        "image_name": "test.jpg",
+        "prediction": "Damaged",
+        "risk_score": 85,
+        "latitude": 11.1271,
+        "longitude": 78.6569,
+        "timestamp": "2026-05-04T09:22:46.247799",
+        "status": "Pending"
+    },
+    {
+        "id": "d16c476d-9865-4bb0-98b4-92584d2075bf",
+        "image_name": "00321.jpg",
+        "prediction": "Damaged",
+        "risk_score": 100,
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "timestamp": "2026-05-04T09:35:21.525198",
+        "status": "Resolved"
+    },
+    {
+        "id": "145a1d24-9131-4e35-9537-b06735aa7523",
+        "image_name": "00073.jpg",
+        "prediction": "Damaged",
+        "risk_score": 96,
+        "latitude": 11.077012426229508,
+        "longitude": 77.1426868409836,
+        "timestamp": "2026-05-04T12:47:36.857733",
+        "status": "Pending"
+    },
+    {
+        "id": "c84fe332-1674-47b4-a09a-74fa596b2d0d",
+        "image_name": "00001.jpg",
+        "prediction": "Damaged",
+        "risk_score": 89,
+        "latitude": 11.07681,
+        "longitude": 77.14301,
+        "failure_probability": 94,
+        "estimated_failure_days": 7,
+        "explanation": "Structural damage detected under current environmental stress.",
+        "timestamp": "2026-05-04T16:07:44.940014",
+        "status": "Pending"
+    },
+    {
+        "id": "1a6f4e87-7301-42f1-ba07-fb15f658b075",
+        "image_name": "test_rgb.jpg",
+        "prediction": "Damaged",
+        "risk_score": 99,
+        "latitude": 12.9716,
+        "longitude": 77.5946,
+        "failure_probability": 100,
+        "estimated_failure_days": 7,
+        "explanation": "Structural damage detected under current environmental stress.",
+        "timestamp": "2026-05-04T22:14:33.015351",
+        "status": "Resolved"
+    },
+    {
+        "id": "d1bd45c7-9b5b-4c7c-9fb3-be58a8d82537",
+        "image_name": "00342.jpg",
+        "prediction": "Damaged",
+        "risk_score": 93,
+        "latitude": 11.078267,
+        "longitude": 77.142604,
+        "failure_probability": 97,
+        "estimated_failure_days": 7,
+        "explanation": "Structural damage detected under current environmental stress.",
+        "recommended_action": "Monitor condition",
+        "impact_score": "Low",
+        "timestamp": "2026-05-04T23:10:17.075758",
+        "status": "Pending",
+        "action_log": [
+            {
+                "action": "Created",
+                "timestamp": "2026-05-04T23:10:17.075773"
+            }
+        ]
+    },
+    {
+        "id": "fa362f62-9346-4cbb-a9f1-4bcd0a5db2ca",
+        "image_name": "00006.jpg",
+        "prediction": "Safe",
+        "risk_score": 41,
+        "latitude": 9.9369266,
+        "longitude": 78.007823,
+        "failure_probability": 48,
+        "estimated_failure_days": 30,
+        "explanation": "No major structural issues detected, but environmental factors contribute to moderate risk.",
+        "recommended_action": "Monitor condition",
+        "impact_score": "Low",
+        "timestamp": "2026-05-05T21:29:35.717343",
+        "status": "Pending",
+        "action_log": [
+            {
+                "action": "Created",
+                "timestamp": "2026-05-05T21:29:35.717359"
+            }
+        ]
+    }
+]

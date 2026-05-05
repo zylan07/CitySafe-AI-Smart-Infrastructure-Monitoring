@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitySafe - Government Command Center</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="glow-orb orb-1"></div>
+        <div class="glow-orb orb-2"></div>
+    </div>
+
+    <header class="admin-header">
+        <div class="header-content">
+            <h1>CitySafe <span>Command Center</span></h1>
+            <p>Government Dashboard</p>
+        </div>
+        <div class="header-meta">
+            <span id="last-updated">Last updated: --:--:--</span>
+            <button onclick="downloadPDF()" class="pdf-btn">
+                <span class="icon">📄</span> Download Report
+            </button>
+        </div>
+    </header>
+
+    <main class="dashboard-grid">
+        
+        <!-- Summary Panel -->
+        <section class="summary-panel glass-card">
+            <div class="summary-metric">
+                <span class="metric-value" id="total-reports">0</span>
+                <span class="metric-label">Total Reports</span>
+            </div>
+            <div class="summary-metric high-risk-metric">
+                <span class="metric-value" id="high-risk-count">0</span>
+                <span class="metric-label">High Risk</span>
+            </div>
+            <div class="summary-metric mod-risk-metric">
+                <span class="metric-value" id="mod-risk-count">0</span>
+                <span class="metric-label">Moderate</span>
+            </div>
+            <div class="summary-metric low-risk-metric">
+                <span class="metric-value" id="low-risk-count">0</span>
+                <span class="metric-label">Low Risk</span>
+            </div>
+        </section>
+
+        <!-- Trend Graph -->
+        <section class="glass-card chart-section">
+            <div class="chart-header">
+                <h2>Reports Over Time</h2>
+            </div>
+            <div class="chart-container">
+                <canvas id="trendChart"></canvas>
+            </div>
+        </section>
+
+        <div class="main-content-wrapper">
+            <!-- Left Column: Map & Notifications -->
+            <div class="left-col">
+                <section class="glass-card map-section">
+                    <h2>Live Infrastructure Map</h2>
+                    <div id="admin-map" class="map-container"></div>
+                </section>
+
+                <section class="glass-card notifications-section">
+                    <h2>Live Alerts</h2>
+                    <div id="notifications-container" class="notifications-list">
+                        <!-- Notifications will be injected here -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Right Column: Priority Queue -->
+            <div class="right-col">
+                <section class="glass-card queue-section">
+                    <div class="queue-section-header">
+                        <h2>Priority Queue</h2>
+                        <div class="filters-bar">
+                            <input type="text" id="filter-search" placeholder="Search location..." class="filter-input">
+                            <select id="filter-risk" class="filter-select">
+                                <option value="all">Risk: All</option>
+                                <option value="high">High</option>
+                                <option value="mod">Moderate</option>
+                                <option value="low">Low</option>
+                            </select>
+                            <select id="filter-status" class="filter-select">
+                                <option value="all">Status: All</option>
+                                <option value="pending">Pending</option>
+                                <option value="resolved">Resolved</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="queue-container" class="queue-list">
+                        <!-- Queue cards will be injected here -->
+                        <div class="empty-state">No reports available</div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Toast Popup -->
+    <div class="toast-popup hidden" id="action-toast">
+        <div class="toast-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        </div>
+        <p id="toast-msg">✔ Issue marked as resolved</p>
+    </div>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="app.js"></script>
+</body>
+</html>
