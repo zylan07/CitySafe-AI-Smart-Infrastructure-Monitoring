@@ -328,6 +328,8 @@ canvas {
     gap: 8px;
     align-items: center;
     flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .filter-input, .filter-select {
@@ -578,11 +580,13 @@ canvas {
 @media (max-width: 768px) {
     .summary-panel {
         grid-template-columns: 1fr !important;
+        padding: 10px;
     }
     .dashboard-grid {
-        padding: 10px;
+        padding: 10px !important;
         width: 100%;
         grid-template-columns: 1fr !important;
+        box-sizing: border-box;
     }
     .queue-container {
         padding: 10px;
@@ -590,20 +594,29 @@ canvas {
     .queue-card, .glass-card {
         width: 100%;
         box-sizing: border-box;
-        overflow-wrap: break-word;
+        overflow-wrap: anywhere;
+        word-break: break-word;
         max-width: 100%;
         overflow: hidden;
     }
     .map-container, #admin-map {
         height: 250px !important;
         width: 100% !important;
+        box-sizing: border-box;
     }
     .admin-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 10px;
         flex-wrap: wrap;
+    }
+    .filters-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .filters-bar input, .filters-bar select {
+        width: 100%;
     }
     button, .pdf-btn {
         width: 100%;
@@ -612,12 +625,18 @@ canvas {
         justify-content: center;
         max-width: 100%;
         white-space: normal;
+        box-sizing: border-box;
     }
     input, select {
         width: 100%;
+        box-sizing: border-box;
     }
-    h1 { font-size: 1.5rem; }
-    h2 { font-size: 1.2rem; }
+    h1 { font-size: 1.5rem; overflow-wrap: anywhere; }
+    h2 { font-size: 1.2rem; overflow-wrap: anywhere; }
+    .main-content-wrapper, .left-col, .right-col {
+        gap: 1rem;
+        width: 100%;
+    }
 }
 
 img {
@@ -627,4 +646,7 @@ img {
 button {
     max-width: 100%;
     white-space: normal;
+}
+* {
+    max-width: 100vw;
 }
