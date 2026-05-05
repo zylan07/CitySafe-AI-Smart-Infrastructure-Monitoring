@@ -115,7 +115,7 @@ Citizen Dashboard     Admin Dashboard
       Uvicorn ASGI Server
            ↓          ↓
       KNN Model    JSON Database
-    (model/*.pkl) (database/reports.json)
+    (lazy-loaded) (database/reports.json)
 ```
 
 ---
@@ -134,7 +134,7 @@ Citizen Dashboard     Admin Dashboard
 - python-multipart, Pydantic (request validation)
 
 ### Machine Learning
-- Scikit-learn (KNN classifier), NumPy, Pillow, scikit-image
+- Scikit-learn (KNN classifier), NumPy, Pillow (image preprocessing)
 
 > All Python dependencies are listed in `backend/requirements.txt`.
 
@@ -164,6 +164,7 @@ CitySafe-Dashboard/
 ├── frontend/
 │   ├── index.html                ← Landing / portal page
 │   ├── style.css
+│   ├── favicon.png               ← App favicon
 │   ├── user/                     ← Citizen dashboard
 │   │   ├── index.html
 │   │   ├── app.js
@@ -236,7 +237,7 @@ move concrete_knn_model.pkl backend/model/
 
 | Layer | Platform | Notes |
 |-------|----------|-------|
-| Frontend | Vercel | Static deployment |
+| Frontend | Vercel / GitHub Pages | Static deployment |
 | Backend | Render | Direct start command (no shell script) |
 | Database | JSON file | Prototype stage only |
 
@@ -248,6 +249,17 @@ uvicorn server:app --host 0.0.0.0 --port 10000
 **Python Version:** Configured via `backend/runtime.txt` → `python-3.10`
 
 > The frontend already points to the live production API at `https://citysafe-backend.onrender.com`.
+
+### 🔌 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `POST` | `/api/analyze` | Analyze uploaded image; returns prediction, risk score, and AI insights |
+| `POST` | `/api/report/save` | Save a citizen report to the JSON database |
+| `GET` | `/api/reports` | Fetch all reports |
+| `PUT` | `/api/report/update/{id}` | Update report status (e.g. mark as Resolved) |
+| `PUT` | `/api/report/log_view/{id}` | Append a "Viewed" entry to a report's action log |
+| `GET` | `/api/notifications` | Fetch all high-risk reports (risk score > 80) |
 
 ---
 
