@@ -485,10 +485,9 @@ input[type="number"]:focus {
         overflow: hidden;
     }
     .report-header, .report-details {
-        display: flex;
         flex-direction: column;
         align-items: flex-start;
-        width: 100%;
+        gap: 5px;
     }
     .map-container, #map {
         height: 250px !important;
@@ -769,12 +768,12 @@ img {
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 10px;
     border-left-width: 4px;
     transition: var(--transition);
     animation: fadeInUp 0.5s ease forwards;
     word-break: break-word;
-    overflow-wrap: break-word;
+    overflow-wrap: anywhere;
     max-width: 100%;
     overflow: hidden;
 }
@@ -801,30 +800,31 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
 }
 
 .report-title {
-    font-weight: 600;
+    font-weight: bold;
     font-size: 1.1rem;
     color: var(--text-primary);
     overflow-wrap: anywhere;
-    word-break: break-word;
-    white-space: normal;
 }
 
 .report-time {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
+    white-space: nowrap;
+    font-size: 13px;
+    opacity: 0.8;
 }
 
 .report-details {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
     font-size: 0.9rem;
     color: var(--text-secondary);
+}
+
+.report-details span {
+    margin-right: 10px;
 }
 
 .report-details span strong {
