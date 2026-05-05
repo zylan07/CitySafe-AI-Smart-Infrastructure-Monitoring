@@ -30,6 +30,11 @@ body.light-mode {
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: var(--font-main);
     background-color: var(--bg-color);
@@ -118,6 +123,10 @@ body {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     transition: var(--transition);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .glass-card:hover {
@@ -461,26 +470,34 @@ input[type="number"]:focus {
 /* Responsiveness */
 @media (max-width: 768px) {
     .dashboard-container {
-        padding: 1rem;
+        padding: 10px;
+        width: 100%;
         padding-bottom: 4rem;
     }
     .report-card, .glass-card {
         width: 100%;
         box-sizing: border-box;
         overflow-wrap: break-word;
+        max-width: 100%;
+        overflow: hidden;
     }
     .map-container, #map {
-        height: 250px;
+        height: 250px !important;
+        width: 100% !important;
     }
     .app-header {
         padding: 1rem;
         margin-top: 1rem;
+        flex-direction: column;
+        flex-wrap: wrap;
     }
     button, .primary-btn, .secondary-btn, .location-btn {
         padding: 12px;
         font-size: 14px;
         width: 100%;
         justify-content: center;
+        max-width: 100%;
+        white-space: normal;
     }
     input, select {
         width: 100%;
@@ -504,7 +521,8 @@ img {
 
 .map-container {
     height: 250px;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100%;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     margin-bottom: 0.5rem;
@@ -514,6 +532,7 @@ img {
 /* Fix leaflet controls in dark theme */
 .leaflet-container {
     font-family: var(--font-main);
+    width: 100% !important;
 }
 .leaflet-bar a, .leaflet-control-attribution {
     background-color: rgba(20, 25, 40, 0.8) !important;
@@ -732,6 +751,10 @@ img {
     border-left-width: 4px;
     transition: var(--transition);
     animation: fadeInUp 0.5s ease forwards;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .report-card:hover {
@@ -756,6 +779,8 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .report-title {
@@ -772,7 +797,7 @@ img {
 .report-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 8px;
     font-size: 0.9rem;
     color: var(--text-secondary);
 }

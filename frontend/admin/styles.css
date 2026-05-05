@@ -21,6 +21,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
 body {
     font-family: var(--font-main);
     background-color: var(--bg-dark);
@@ -136,6 +141,10 @@ body {
     border-radius: 16px;
     padding: 1.5rem;
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .glass-card h2 {
@@ -199,7 +208,8 @@ body {
 /* Map Section */
 .map-container {
     height: 400px;
-    width: 100%;
+    width: 100% !important;
+    max-width: 100%;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     z-index: 1;
@@ -209,6 +219,7 @@ body {
 .leaflet-container {
     font-family: var(--font-main);
     background: #141928;
+    width: 100% !important;
 }
 .leaflet-bar a, .leaflet-control-attribution {
     background-color: rgba(20, 25, 40, 0.8) !important;
@@ -295,6 +306,10 @@ body {
     width: 100%;
 }
 
+canvas {
+    max-width: 100% !important;
+}
+
 /* Priority Queue */
 .queue-section-header {
     margin-bottom: 1.25rem;
@@ -310,7 +325,7 @@ body {
 
 .filters-bar {
     display: flex;
-    gap: 0.5rem;
+    gap: 8px;
     align-items: center;
     flex-wrap: wrap;
 }
@@ -373,6 +388,10 @@ body {
     border-left-width: 4px;
     transition: var(--transition);
     position: relative;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .queue-card.risk-high {
@@ -420,6 +439,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .queue-title {
@@ -436,7 +457,7 @@ body {
 .queue-details {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 8px;
     font-size: 0.9rem;
     color: var(--text-secondary);
 }
@@ -449,6 +470,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
     margin-top: 0.5rem;
     padding-top: 0.75rem;
     border-top: 1px solid rgba(255,255,255,0.05);
@@ -554,10 +577,12 @@ body {
 
 @media (max-width: 768px) {
     .summary-panel {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr !important;
     }
     .dashboard-grid {
-        padding: 1rem;
+        padding: 10px;
+        width: 100%;
+        grid-template-columns: 1fr !important;
     }
     .queue-container {
         padding: 10px;
@@ -566,21 +591,27 @@ body {
         width: 100%;
         box-sizing: border-box;
         overflow-wrap: break-word;
+        max-width: 100%;
+        overflow: hidden;
     }
     .map-container, #admin-map {
-        height: 250px;
+        height: 250px !important;
+        width: 100% !important;
     }
     .admin-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
         padding: 1.5rem 1rem;
+        flex-wrap: wrap;
     }
     button, .pdf-btn {
         width: 100%;
         padding: 12px;
         font-size: 14px;
         justify-content: center;
+        max-width: 100%;
+        white-space: normal;
     }
     input, select {
         width: 100%;
@@ -592,4 +623,8 @@ body {
 img {
     max-width: 100%;
     height: auto;
+}
+button {
+    max-width: 100%;
+    white-space: normal;
 }
