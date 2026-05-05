@@ -459,14 +459,15 @@ canvas {
 
 .queue-details {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
+    gap: 15px;
     font-size: 0.9rem;
     color: var(--text-secondary);
 }
 
 .queue-details span {
-    margin-right: 10px;
+    /* Optional: helps keep label and value together if space permits */
 }
 
 .queue-details span strong {
@@ -492,6 +493,7 @@ canvas {
     text-transform: uppercase;
     display: inline-block;
     align-self: start;
+    white-space: nowrap;
 }
 
 .status-pending {

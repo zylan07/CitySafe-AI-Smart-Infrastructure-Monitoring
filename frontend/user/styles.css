@@ -760,14 +760,15 @@ img {
 
 .report-details {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
+    gap: 15px;
     font-size: 0.9rem;
     color: var(--text-secondary);
 }
 
 .report-details span {
-    margin-right: 10px;
+    /* Kept for overrides if needed */
 }
 
 .report-details span strong {
@@ -782,6 +783,7 @@ img {
     text-transform: uppercase;
     display: inline-block;
     align-self: start;
+    white-space: nowrap;
 }
 
 .status-pending {
