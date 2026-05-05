@@ -148,11 +148,11 @@ Citizen Dashboard     Admin Dashboard
 CitySafe-Dashboard/
 │
 ├── README.md
-├── requirements.txt              ← Python dependencies
-├── runtime.txt                   ← Python version (3.10)
-├── start.sh                      ← Render deployment command
 │
 ├── backend/
+│   ├── requirements.txt              ← Python dependencies
+│   ├── runtime.txt                   ← Python version (3.10)
+│   ├── start.sh                      ← Render deployment command
 │   ├── server.py                 ← FastAPI app & all API routes
 │   ├── train_knn.py              ← KNN model training script
 │   ├── model/
