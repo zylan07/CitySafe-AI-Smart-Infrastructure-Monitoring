@@ -10,8 +10,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import io
 from PIL import Image
-import skimage.transform
-import skimage.color
 
 os.makedirs("model", exist_ok=True)
 os.makedirs("database", exist_ok=True)
@@ -34,14 +32,19 @@ app.add_middleware(
 )
 
 model = None
-try:
-    if os.path.exists(MODEL_FILE):
-        with open(MODEL_FILE, "rb") as f:
-            model = pickle.load(f)
-    else:
-        print(f"Warning: Model file not found at {MODEL_FILE}")
-except Exception as e:
-    print(f"Error loading model: {e}")
+
+def get_model():
+    global model
+    if model is None:
+        try:
+            if os.path.exists(MODEL_FILE):
+                with open(MODEL_FILE, "rb") as f:
+                    model = pickle.load(f)
+            else:
+                print(f"Warning: Model file not found at {MODEL_FILE}")
+        except Exception as e:
+            print(f"Error loading model: {e}")
+    return model
 
 @app.post("/api/analyze")
 async def analyze_image(
@@ -49,25 +52,24 @@ async def analyze_image(
     rainfall: float = Form(...),
     traffic: float = Form(...)
 ):
-    if model is None:
+    current_model = get_model()
+    if current_model is None:
         return {"error": "Model not loaded on server."}
 
     try:
         contents = await file.read()
         try:
-            image = Image.open(io.BytesIO(contents)).convert("RGB")
+            image = Image.open(io.BytesIO(contents)).convert("L")
         except Exception:
             return {"error": "Invalid image format"}
             
-        img_array = np.array(image)
-        gray_image = skimage.color.rgb2gray(img_array)
-            
-        resized = skimage.transform.resize(gray_image, (20, 20))
-        flattened_img = np.asarray(resized).ravel()
+        resized = image.resize((20, 20))
+        img_array = np.array(resized) / 255.0
+        flattened_img = img_array.ravel()
         
-        prediction_int = int(model.predict([flattened_img])[0])
+        prediction_int = int(current_model.predict([flattened_img])[0])
         try:
-            probabilities = model.predict_proba([flattened_img])[0]
+            probabilities = current_model.predict_proba([flattened_img])[0]
             confidence = float(max(probabilities))
         except:
             confidence = 0.8

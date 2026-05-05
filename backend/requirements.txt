@@ -4,4 +4,3 @@ python-multipart
 pillow
 scikit-learn
 numpy
-scikit-image
