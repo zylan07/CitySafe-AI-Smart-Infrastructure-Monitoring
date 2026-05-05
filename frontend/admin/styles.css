@@ -394,6 +394,7 @@ canvas {
     overflow-wrap: anywhere;
     max-width: 100%;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .queue-card.risk-high {
