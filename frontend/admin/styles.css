@@ -123,6 +123,8 @@ body {
     gap: 2rem;
     max-width: 1600px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* Glass Card Shared */
@@ -554,4 +556,40 @@ body {
     .summary-panel {
         grid-template-columns: 1fr 1fr;
     }
+    .dashboard-grid {
+        padding: 1rem;
+    }
+    .queue-container {
+        padding: 10px;
+    }
+    .queue-card, .glass-card {
+        width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+    }
+    .map-container, #admin-map {
+        height: 250px;
+    }
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.5rem 1rem;
+    }
+    button, .pdf-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        justify-content: center;
+    }
+    input, select {
+        width: 100%;
+    }
+    h1 { font-size: 1.5rem; }
+    h2 { font-size: 1.2rem; }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }

@@ -459,10 +459,42 @@ input[type="number"]:focus {
 }
 
 /* Responsiveness */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1rem;
+        padding-bottom: 4rem;
+    }
+    .report-card, .glass-card {
+        width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+    }
+    .map-container, #map {
+        height: 250px;
+    }
+    .app-header {
+        padding: 1rem;
+        margin-top: 1rem;
+    }
+    button, .primary-btn, .secondary-btn, .location-btn {
+        padding: 12px;
+        font-size: 14px;
+        width: 100%;
+        justify-content: center;
+    }
+    input, select {
+        width: 100%;
+    }
     .form-row {
         grid-template-columns: 1fr;
     }
+    h1 { font-size: 1.8rem; }
+    h2 { font-size: 1.3rem; }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Map Section */
