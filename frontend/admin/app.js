@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let matchSearch = true;
             if (query) {
                 const name = r.image_name ? r.image_name.toLowerCase() : '';
-                const locStr = `${r.latitude.toFixed(4)}, ${r.longitude.toFixed(4)}`;
+                const locStr = `${(r.latitude || 0).toFixed(4)}, ${(r.longitude || 0).toFixed(4)}`;
                 matchSearch = name.includes(query) || locStr.includes(query);
             }
             
@@ -95,8 +95,8 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchData() {
         try {
             const [reportsRes, notifRes] = await Promise.all([
-                fetch('http://127.0.0.1:8000/api/reports'),
-                fetch('http://127.0.0.1:8000/api/notifications')
+                fetch('https://citysafe-backend.onrender.com/api/reports'),
+                fetch('https://citysafe-backend.onrender.com/api/notifications')
             ]);
             
             if (!reportsRes.ok || !notifRes.ok) throw new Error("API Error");
@@ -507,7 +507,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.markResolved = async function(id) {
         try {
-            const res = await fetch(`http://127.0.0.1:8000/api/report/update/${id}`, {
+            const res = await fetch(`https://citysafe-backend.onrender.com/api/report/update/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ status: "Resolved" })
@@ -533,7 +533,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1500);
             
             // Log View Event
-            fetch(`http://127.0.0.1:8000/api/report/log_view/${id}`, { method: 'PUT' })
+            fetch(`https://citysafe-backend.onrender.com/api/report/log_view/${id}`, { method: 'PUT' })
                 .then(r => r.json())
                 .then(() => fetchData())
                 .catch(e => console.error("Failed to log view", e));

@@ -136,6 +136,8 @@ Citizen Dashboard     Admin Dashboard
 ### Machine Learning
 - Scikit-learn (KNN classifier), NumPy, Pillow, scikit-image
 
+> All Python dependencies are listed in `backend/requirements.txt`.
+
 ### External APIs
 - [Open-Meteo](https://open-meteo.com/) — live rainfall data
 - [Nominatim / OpenStreetMap](https://nominatim.org/) — forward + reverse geocoding
@@ -150,11 +152,10 @@ CitySafe-Dashboard/
 ├── README.md
 │
 ├── backend/
-│   ├── requirements.txt              ← Python dependencies
-│   ├── runtime.txt                   ← Python version (3.10)
-│   ├── start.sh                      ← Render deployment command
 │   ├── server.py                 ← FastAPI app & all API routes
 │   ├── train_knn.py              ← KNN model training script
+│   ├── requirements.txt          ← Python dependencies
+│   ├── runtime.txt               ← Python version pin (python-3.10)
 │   ├── model/
 │   │   └── concrete_knn_model.pkl
 │   └── database/
@@ -202,6 +203,8 @@ uvicorn server:app --reload
 API runs at: `http://127.0.0.1:8000`  
 Swagger docs: `http://127.0.0.1:8000/docs`
 
+> **Production API:** `https://citysafe-backend.onrender.com`
+
 ### 🌐 Frontend
 
 Open with **Live Server** in VS Code:
@@ -234,10 +237,17 @@ move concrete_knn_model.pkl backend/model/
 | Layer | Platform | Notes |
 |-------|----------|-------|
 | Frontend | Vercel | Static deployment |
-| Backend | Render | Uses `start.sh` + `runtime.txt` |
+| Backend | Render | Direct start command (no shell script) |
 | Database | JSON file | Prototype stage only |
 
-> ⚠️ After deploying to Render, update the API base URL in `frontend/user/app.js` and `frontend/admin/app.js` from `http://127.0.0.1:8000` to your Render service URL.
+**Render Start Command:**
+```
+uvicorn server:app --host 0.0.0.0 --port 10000
+```
+**Render Root Directory:** `backend`  
+**Python Version:** Configured via `backend/runtime.txt` → `python-3.10`
+
+> The frontend already points to the live production API at `https://citysafe-backend.onrender.com`.
 
 ---
 

@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('traffic', traffic);
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/analyze', {
+            const response = await fetch('https://citysafe-backend.onrender.com/api/analyze', {
                 method: 'POST',
                 body: formData
             });
@@ -383,7 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Duplicate Check
-            const historyRes = await fetch('http://127.0.0.1:8000/api/reports');
+            const historyRes = await fetch('https://citysafe-backend.onrender.com/api/reports');
             if (historyRes.ok) {
                 const pastReports = await historyRes.json();
                 const threshold = 0.05; // 50 meters
@@ -419,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/report/save', {
+            const response = await fetch('https://citysafe-backend.onrender.com/api/report/save', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -560,7 +560,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/reports');
+            const response = await fetch('https://citysafe-backend.onrender.com/api/reports');
             if (!response.ok) throw new Error('Failed to fetch reports');
             
             const reports = await response.json();
@@ -659,7 +659,7 @@ document.addEventListener('DOMContentLoaded', () => {
             showToast("🔄 Re-analyzing...", 2000);
             
             try {
-                const response = await fetch('http://127.0.0.1:8000/api/analyze', {
+                const response = await fetch('https://citysafe-backend.onrender.com/api/analyze', {
                     method: 'POST',
                     body: formData
                 });
