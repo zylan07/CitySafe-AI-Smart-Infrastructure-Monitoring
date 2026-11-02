@@ -17,7 +17,7 @@ import torch
 import torch.nn as nn
 import pickle
 
-from backend.train_vision import CitySafeCNN
+from backend.model.citysafe_cnn import CitySafeCNN
 
 MODEL_DIR = "backend/model"
 CNN_WEIGHTS = os.path.join(MODEL_DIR, "citysafe_cnn.pt")
