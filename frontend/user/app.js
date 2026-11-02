@@ -189,6 +189,46 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
 
+    // Geocoding Helper with Primary Photon (OSM) & Network-Error-Only Nominatim Fallback
+    async function searchLocation(query, limit = 5) {
+        // 1. Primary: Photon OpenStreetMap Geocoder (CORS-enabled, handles search & autocomplete)
+        try {
+            const res = await fetch(`https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=${limit}`);
+            if (res.ok) {
+                const geojson = await res.json();
+                const features = geojson && geojson.features ? geojson.features : [];
+                return features.map(f => {
+                    const p = f.properties || {};
+                    const parts = [p.name, p.street, p.locality, p.district, p.city, p.state, p.country].filter(Boolean);
+                    const displayName = parts.filter((v, i, a) => a.indexOf(v) === i).join(', ');
+                    return {
+                        display_name: displayName || p.name || query,
+                        lat: f.geometry.coordinates[1],
+                        lon: f.geometry.coordinates[0]
+                    };
+                });
+            }
+            console.warn(`Photon returned HTTP ${res.status}, attempting fallback to Nominatim`);
+        } catch (e) {
+            console.warn("Photon network error, attempting fallback to Nominatim:", e);
+        }
+
+        // 2. Strict Fallback: Only executed when Photon encountered a network or HTTP error
+        try {
+            const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=${limit}`);
+            if (!res.ok) throw new Error(`Search provider HTTP ${res.status}`);
+            const data = await res.json();
+            return (data || []).map(item => ({
+                display_name: item.display_name,
+                lat: parseFloat(item.lat),
+                lon: parseFloat(item.lon)
+            }));
+        } catch (err) {
+            console.error("Nominatim fallback also unavailable:", err);
+            throw err;
+        }
+    }
+
     // Search Autocomplete Handler
     let searchTimeout;
     searchInput.addEventListener('input', (e) => {
@@ -205,8 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         searchTimeout = setTimeout(async () => {
             try {
-                const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=5`);
-                const data = await res.json();
+                const data = await searchLocation(query, 5);
                 console.log("Search results:", data);
                 
                 if (searchSuggestions) {
@@ -250,8 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (searchSuggestions) searchSuggestions.classList.add('hidden');
 
         try {
-            const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`);
-            const data = await res.json();
+            const data = await searchLocation(query, 1);
 
             if (data && data.length > 0) {
                 const lat = parseFloat(data[0].lat);
